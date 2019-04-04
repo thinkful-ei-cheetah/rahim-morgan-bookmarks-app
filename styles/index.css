@@ -21,6 +21,17 @@ fieldset {
 h1 {
   text-align: center;
 }
+
+li {
+  text-align: center;
+  list-style-type: none;
+  border: 1px solid grey;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -29,4 +40,19 @@ h1 {
 .bookmark-section {
   margin: 5px;
   text-align: center;
+}
+
+.js-list-title {
+  display: block;
+}
+
+.js-list-rating {
+  display: block;
+}
+
+.js-list-delete {
+}
+
+.js-list-wrapper {
+  position: relative;
 }
