@@ -13,7 +13,7 @@
         <h1>Booksmarks</h1>
       </header>
       <main role="main">
-        <section role="region">
+        <section role="region" id="bookmark-section">
           <form class="js-bookmark">
             <legend>Add your bookmark!</legend>
             <fieldset>
@@ -31,7 +31,8 @@
             <button type="submit">Submit</button>
           </form>
         </section>
-        <section class="bookmark-section">
+
+        <section role="region" class="bookmark-section">
           <label for="js-rating-filter-select">Filter your bookmarks</label>
           <select id="js-rating-filter-select">
             <option value="minimum-rating">Select a minimum rating</option>
@@ -42,8 +43,13 @@
             <option value="5">5</option>
           </select>
         </section>
+
+        <section role="region" class="bookmark-section">
+          <ul class="js-bookmark-list"></ul>
+        </section>
       </main>
     </div>
+
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"
