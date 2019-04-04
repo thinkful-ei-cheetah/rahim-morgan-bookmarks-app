@@ -64,6 +64,10 @@ li {
   margin: auto;
 }
 
+.js-error-message {
+  color: red;
+}
+
 .js-list-wrapper {
   position: relative;
 }
