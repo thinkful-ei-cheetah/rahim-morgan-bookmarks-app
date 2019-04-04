@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+form {
+  border: 2px solid black;
+  padding: 5px;
+}
+
+legend {
+  background-color: #000;
+  color: #fff;
+  padding: 3px 6px;
+  margin-bottom: 5px;
+}
+
+fieldset {
+  margin-bottom: 5px;
+}
+
+h1 {
+  text-align: center;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bookmark-section {
+  margin: 5px;
+  text-align: center;
+}
