@@ -50,7 +50,18 @@ li {
   display: block;
 }
 
+.js-list-description {
+  display: block;
+}
+
 .js-list-delete {
+  display: block;
+  margin: auto;
+}
+
+.js-visit-site {
+  display: block;
+  margin: auto;
 }
 
 .js-list-wrapper {
