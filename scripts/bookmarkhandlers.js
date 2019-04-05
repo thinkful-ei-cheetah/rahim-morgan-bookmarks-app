@@ -1,14 +1,35 @@
 'use strict';
 /* global $ */
 
-// As a user: I can add bookmarks to my bookmark list. Bookmarks contain:
-// title
-// url link
-// description
-// rating (1-5)
 const BOOKMARKLIST = (function() {
+  $.fn.extend({
+    serializeJson: function() {
+      const obj = {};
+      const formData = new FormData(this[0]);
+      formData.forEach((val, key) => {
+        obj[key] = val;
+      });
+      return JSON.stringify(obj);
+    }
+  });
+  // As a user: I can add bookmarks to my bookmark list. Bookmarks contain:
+  // title
+  // url link
+  // description
+  // rating (1-5)
+
   function addBookmarkHandler() {
-    console.log('add bookmarkhandler works');
+    $('.js-bookmark-form').on('submit', function(event) {
+      event.preventDefault();
+      //get data from form and create object from data
+      const data = $(event.target).serializeJson();
+      //push data to api
+      API.addBookmarks(data);
+      //return data from api
+      //merge store and api data
+      //render page
+      console.log('add bookmarkhandler works and provides ', data);
+    });
   }
 
   // I can see a list of my bookmarks when I first open the app

@@ -41,11 +41,30 @@ const API = (function() {
   };
 
   function getBookmarks() {
-    console.log('API.getBookmarks works');
-    return listApiFetch(BASE_URL);
+    return listApiFetch(BASE_URL).then(
+      //return data from api
+      data => {
+        console.log('api.getBooksmarks works');
+        //merge store and api data
+        STORE.addApiData(data);
+        //render page
+      }
+    );
+  }
+
+  function addBookmarks(bookmark) {
+    console.log('api.addBookmarks works and has', bookmark);
+    return listApiFetch(BASE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: bookmark
+    });
   }
 
   return {
-    getBookmarks
+    getBookmarks,
+    addBookmarks
   };
 })();
