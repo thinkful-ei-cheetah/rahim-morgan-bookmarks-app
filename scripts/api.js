@@ -57,8 +57,15 @@ const API = (function() {
     });
   }
 
+  function removeBookmarks(id) {
+    return listApiFetch(BASE_URL + '/' + id, {
+      method: 'DELETE'
+    });
+  }
+
   return {
     getBookmarks,
-    addBookmarks
+    addBookmarks,
+    removeBookmarks
   };
 })();
