@@ -18,27 +18,28 @@ const BOOKMARKLIST = (function() {
     if (data.expanded) {
       //add data to template
       //return template
-
-      return `<li data-item-id=${data.id}>
+      return `<li class="js-bookmark-li" data-item-id=${data.id}>
       <div class="js-list-wrapper">
         <span class="js-list-title">Title: ${data.title}</span>
         <div class="js-rating">
           <span class="js-list-rating">Rating: ${data.rating}</span>
+          <button class="js-list-toggle">&#9776</button>
           <button class="js-list-delete">Delete</button>
+
         </div>
         <div class="js-rating">
           <span class="js-list-description">Description ${data.desc}</span>
           <button class="js-visit-site" target=${data.url}>Visit Site</button>
         </div>
       </div>
-    </li>
-    <li>`;
+    </li>`;
     }
-    return `<li data-item-id=${data.id}>
+    return `<li class="js-bookmark-li" data-item-id=${data.id}>
               <div class="js-list-wrapper">
                 <span class="js-list-title">Title: ${data.title}</span>
                 <div class="js-rating">
                   <span class="js-list-rating">Rating: ${data.rating}</span>
+                  <button class="js-list-toggle">&#9776</button>
                   <button class="js-list-delete">Delete</button>
                 </div>
               </div>
@@ -52,7 +53,14 @@ const BOOKMARKLIST = (function() {
   }
 
   function render() {
-    const localCopy = [...STORE.bookmarks];
+    let localCopy = [];
+    if (STORE.ratingFilter > 0) {
+      localCopy = STORE.bookmarks.filter(items => {
+        return items.rating >= STORE.ratingFilter;
+      });
+    } else {
+      localCopy = [...STORE.bookmarks];
+    }
     //create elements from store data.
     let bookmarkList = localCopy.map(element => {
       return createElement(element);
@@ -63,7 +71,7 @@ const BOOKMARKLIST = (function() {
     $('.js-bookmark-list').html(bookmarkList);
   }
 
-  /*   ***********************USER STORY ******************   */
+  /*   ***********************USER STORY ******************   DONE */
   // I receive appropriate feedback when I cannot submit a bookmark
   // Check all validations in the API documentation (e.g. title and url field required)
   function renderError() {
@@ -113,7 +121,12 @@ const BOOKMARKLIST = (function() {
   // Detailed view expands to additionally display description and a "Visit Site" link
 
   function detailedViewHandler() {
-    console.log('detailview handler works');
+    $('.js-bookmark-list').on('click', '.js-list-toggle', function(event) {
+      const id = getItemIdFromElement(event.currentTarget);
+      const item = STORE.findById(id);
+      item.expanded = !item.expanded;
+      render();
+    });
   }
 
   function getItemIdFromElement(item) {
@@ -126,7 +139,6 @@ const BOOKMARKLIST = (function() {
   function deleteBookmarkHandler() {
     $('.js-bookmark-list').on('click', '.js-list-delete', function(event) {
       const id = getItemIdFromElement(event.currentTarget);
-
       API.removeBookmarks(id)
         .then(() => {
           STORE.findAndDelete(id);
@@ -138,14 +150,19 @@ const BOOKMARKLIST = (function() {
           renderError();
         });
     });
-    console.log('delete bookmark handler works');
   }
 
-  /*   ***********************USER STORY ******************   */
+  /*   ***********************USER STORY ******************   DONE*/
   // I can select from a dropdown a "minimum rating" to filter the list by all bookmarks
   // rated at or above the chosen selection
   function ratingsfilterHandler() {
-    console.log('ratings filter handler works');
+    $('.js-dropdown-rating-menu').on('change', function(event) {
+      const selected = $(event.target)
+        .children('option:selected')
+        .val();
+      STORE.ratingFilter = selected;
+      render();
+    });
   }
 
   function bindEventListeners() {

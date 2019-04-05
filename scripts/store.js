@@ -26,7 +26,7 @@ const STORE = (function() {
 
   return {
     bookmarks: [],
-    ratingfilter: false,
+    ratingFilter: 0,
     error: false,
     addApiData,
     findById,
