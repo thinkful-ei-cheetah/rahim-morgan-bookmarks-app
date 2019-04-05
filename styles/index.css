@@ -43,7 +43,7 @@ li {
 }
 
 .js-list-title {
-  display: block;
+  display: flex;
 }
 
 .js-list-rating {
@@ -56,12 +56,10 @@ li {
 
 .js-list-delete {
   display: block;
-  margin: auto;
 }
 
 .js-visit-site {
   display: block;
-  margin: auto;
 }
 
 .js-error-message {
@@ -70,4 +68,13 @@ li {
 
 .js-list-wrapper {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.js-rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

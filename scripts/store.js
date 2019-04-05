@@ -3,6 +3,8 @@
 
 const STORE = (function() {
   return {
-    bookmarks: []
+    bookmarks: [],
+    expanded: false,
+    ratingfilter: false
   };
 })();
