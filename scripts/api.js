@@ -35,25 +35,19 @@ const API = (function() {
         }
 
         // otherwise, return the json as normal resolved Promise
-        console.log(data);
         return data;
       });
   };
 
   function getBookmarks() {
-    return listApiFetch(BASE_URL).then(
-      //return data from api
-      data => {
-        console.log('api.getBooksmarks works');
-        //merge store and api data
-        STORE.addApiData(data);
-        //render page
-      }
-    );
+    //return data from api
+    return listApiFetch(BASE_URL).then(data => {
+      //merge store and api data
+      data.forEach(element => STORE.addApiData(element));
+    });
   }
 
   function addBookmarks(bookmark) {
-    console.log('api.addBookmarks works and has', bookmark);
     return listApiFetch(BASE_URL, {
       method: 'POST',
       headers: {
