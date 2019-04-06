@@ -29,7 +29,9 @@ const BOOKMARKLIST = (function() {
         </div>
         <div class="js-rating">
           <span class="js-list-description">Description ${data.desc}</span>
-          <button class="js-visit-site" target=${data.url}>Visit Site</button>
+          <a target="_blank" href=${
+            data.url
+          }  class="js-visit-site">Visit Site</a>
         </div>
       </div>
     </li>`;
@@ -48,7 +50,7 @@ const BOOKMARKLIST = (function() {
 
   function generateError(message) {
     return `
-      <span class="js-error-message">${message}</span>
+      <span class="js-error-message">${message}</span><span class="js-error-close">&#9746</span>
     `;
   }
 
@@ -165,11 +167,23 @@ const BOOKMARKLIST = (function() {
     });
   }
 
+  function errorMessageDeleteHandler() {
+    $('.js-error-message-display').on('click', '.js-error-close', function(
+      event
+    ) {
+      console.log('we ate here');
+      STORE.error = false;
+      renderError();
+      render();
+    });
+  }
+
   function bindEventListeners() {
     addBookmarkHandler();
     deleteBookmarkHandler();
     detailedViewHandler();
     ratingsfilterHandler();
+    errorMessageDeleteHandler();
   }
   return {
     bindEventListeners,

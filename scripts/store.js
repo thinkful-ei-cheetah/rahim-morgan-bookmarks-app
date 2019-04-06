@@ -1,5 +1,4 @@
 'use strict';
-/* global $ */
 
 const STORE = (function() {
   const setError = function(error) {
